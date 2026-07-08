@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weltliteratur – Nachschlagewerk</title>
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Philosophie">
+<style>
+:root{--bg:#f7f6f2;--panel:#fff;--ink:#1c1b18;--muted:#6b6862;--line:#e7e4dc;
+  --brand:#3b6e58;--brandink:#fff;--soft:#f0eee9;--hover:#f3f0fa;
+  --shadow:0 8px 24px rgba(40,30,20,.07);
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+[data-theme="dark"]{--bg:#15131a;--panel:#1d1a24;--ink:#ece8f1;--muted:#a49db4;--line:#322c3c;
+  --soft:#241f2e;--hover:#262031;--brandink:#fff;--shadow:0 8px 24px rgba(0,0,0,.4)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-text-size-adjust:100%}
+a{color:var(--brand)}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.hd{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.logo{width:38px;height:38px;border-radius:9px;display:grid;place-items:center;font-size:19px;background:var(--brand);color:#fff;flex:0 0 auto;border:none;cursor:pointer;padding:0}
+.ttl b{font-size:16px;font-weight:800;display:block;line-height:1.1}
+.ttl span{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted)}
+.hd .sp{flex:1}
+.search{width:min(340px,42vw);font:inherit;font-size:14px;color:var(--ink);background:var(--panel);border:1.5px solid var(--line);border-radius:10px;padding:9px 13px}
+.search:focus{outline:none;border-color:var(--brand)}
+.iconbtn{background:var(--panel);border:1.5px solid var(--line);color:var(--ink);border-radius:10px;width:38px;height:38px;font-size:16px;cursor:pointer;flex:0 0 auto}
+.menubtn{display:none}
+.shell{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:280px 1fr;gap:0}
+aside{border-right:1px solid var(--line);padding:18px 10px 60px;height:calc(100vh - 58px);overflow:auto;position:sticky;top:58px}
+.cat{margin-bottom:4px}
+.cat>.catname{display:flex;align-items:center;gap:7px;width:100%;text-align:left;font:inherit;font-weight:700;font-size:14px;color:var(--ink);
+  background:none;border:none;cursor:pointer;padding:8px 10px;border-radius:8px}
+.cat>.catname:hover{background:var(--soft)}
+.cat>.catname .tw{margin-left:auto;color:var(--muted);font-size:11px;transition:.15s}
+.cat.collapsed .children{display:none}
+.cat.collapsed .tw{transform:rotate(-90deg)}
+.children{padding-left:6px}
+.subname{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);padding:8px 10px 3px}
+.alink{display:block;font:inherit;text-align:left;width:100%;background:none;border:none;color:var(--ink);cursor:pointer;
+  padding:6px 10px 6px 22px;border-radius:7px;font-size:13.5px;line-height:1.35}
+.alink:hover{background:var(--soft)}
+.alink.active{background:var(--brand);color:var(--brandink);font-weight:600}
+main{padding:26px 30px 80px;min-width:0;max-width:780px}
+.crumb{font-size:12.5px;color:var(--muted);margin-bottom:6px}
+.art h1{font-size:30px;margin:0 0 14px;line-height:1.15;font-weight:800}
+.art h2{font-size:21px;margin:26px 0 8px}
+.art h3{font-size:17px;margin:20px 0 6px}
+.art p{margin:0 0 13px}
+.art ul{margin:0 0 13px;padding-left:20px}.art li{margin-bottom:5px}
+.art a.ilink{color:var(--brand);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--brand) 35%,transparent);cursor:pointer}
+.art a.ilink:hover{border-bottom-color:var(--brand)}
+.lead{font-size:16.5px;color:var(--ink)}
+.box{background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:12px;padding:12px 16px;margin:14px 0;font-size:14.5px}
+.seealso{margin-top:26px;border-top:1px solid var(--line);padding-top:14px}
+.seealso b{font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+.seealso .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.seealso .chips a{font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 12px;text-decoration:none;color:var(--brand)}
+.aromaframe{width:100%;height:72vh;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.results .alink{padding-left:10px}
+.sidebackdrop{display:none}
+@media(max-width:820px){
+ .hd{padding-top:calc(env(safe-area-inset-top) + 22px);padding-bottom:12px}
+ .iconbtn,.menubtn{width:44px;height:44px;font-size:18px}
+ .shell{grid-template-columns:1fr}
+ aside{position:fixed;top:0;left:0;bottom:0;width:280px;height:100vh;z-index:40;background:var(--panel);transform:translateX(-105%);transition:.25s;padding-top:16px}
+ aside.open{transform:none}
+ .sidebackdrop.open{display:block;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:35}
+ .menubtn{display:grid;place-items:center}
+ main{padding:20px 16px 70px}
+ .search{width:auto;flex:1}
+ .ttl{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="hd">
+    <button class="iconbtn menubtn" id="menubtn" aria-label="Menü">☰</button>
+    <button class="logo" id="logo" title="Startseite" aria-label="Startseite"></button>
+    <div class="ttl"><b id="brand"></b><span>Nachschlagewerk</span></div>
+    <span class="sp"></span>
+    <input class="search" id="search" placeholder="Artikel suchen …">
+    <button class="iconbtn" id="themebtn" aria-label="Dark Mode">🌙</button>
+  </div>
+</header>
+<div class="sidebackdrop" id="backdrop"></div>
+<div class="shell">
+  <aside id="side"></aside>
+  <main id="main"></main>
+</div>
+<script>
+const APP={"title":"Weltliteratur","brand":"Welt<b>literatur</b>","color":"#7a3b2e","ic":"📚","articles":[{"slug":"ueberblick","title":"Überblick & Epochen","crumb":"Grundlagen","body":"<p>Dieses Nachschlagewerk begleitet die Lernkarten-App zur <b>Weltliteratur</b>. Es bündelt Kurzporträts wichtiger Werke, ihrer Autorinnen und Autoren sowie ihrer literaturgeschichtlichen Einordnung – von der frühen Neuzeit bis zur Gegenwart.</p><p>Grobe Orientierung: <b>Sturm und Drang</b> (Gefühl, Genie, ~1770er), <b>Weimarer Klassik</b> (Harmonie, Humanität, um 1800), <b>Realismus</b> (19. Jh.), <b>Moderne</b> (Brüche, neue Erzählformen, ab ~1900) und <b>Gegenwart</b>. Alle Texte sind eigenständig formuliert; es werden keine Originalzitate wiedergegeben.</p>"},{"slug":"faust","title":"Faust I","crumb":"Werke › Deutschland","body":"<p><b>Faust I</b> (1808) von <a class='ilink' data-s='goethe'>Goethe</a> gilt als das zentrale Drama der deutschen Literatur. Der Gelehrte Faust verzweifelt an den Grenzen des Wissens und schließt eine Wette mit dem Teufel Mephisto: Verliert er sich je an einen Augenblick, ist seine Seele verwirkt.</p><p>Im Zentrum steht die <b>Gretchentragödie</b>: Faust verführt das Bürgermädchen Margarete und stürzt es ins Unglück. Das Drama verhandelt das <b>faustische Streben</b>, den Zwiespalt der 'zwei Seelen', Schuld und Erlösung. Aus ihm stammen geflügelte Worte wie 'Gretchenfrage' und 'des Pudels Kern'.</p>"},{"slug":"werther","title":"Die Leiden des jungen Werther","crumb":"Werke › Deutschland","body":"<p>Der Briefroman <b>Die Leiden des jungen Werther</b> (1774) machte <a class='ilink' data-s='goethe'>Goethe</a> mit 24 Jahren europaweit berühmt. Der empfindsame Werther liebt die verlobte Lotte, verzweifelt an dieser aussichtslosen Leidenschaft und nimmt sich das Leben.</p><p>Als Schlüsseltext des <b>Sturm und Drang</b> stellt er Gefühl über Konvention und kritisiert starre Standesschranken. Der Roman löste ein 'Werther-Fieber' und eine Welle von Nachahmungen aus – der sogenannte <b>Werther-Effekt</b>.</p>"},{"slug":"verwandlung","title":"Die Verwandlung","crumb":"Werke › Moderne","body":"<p>In <a class='ilink' data-s='kafka'>Kafkas</a> Erzählung <b>Die Verwandlung</b> (1915) erwacht Gregor Samsa als riesiges Ungeziefer. Ohne dass je eine Ursache genannt wird, wird er von seiner Familie zunehmend verstoßen und stirbt vereinsamt.</p><p>Die Parabel lässt sich als Bild der <b>Entfremdung</b> lesen: Verliert Gregor seine Nützlichkeit als Ernährer, verliert er Wert und Menschlichkeit. Der beklemmend-absurde Ton prägte den Begriff <b>kafkaesk</b>.</p>"},{"slug":"prozess","title":"Der Prozess","crumb":"Werke › Moderne","body":"<p>In <a class='ilink' data-s='kafka'>Kafkas</a> postum (1925) erschienenem Roman <b>Der Prozess</b> wird Josef K. ohne Nennung eines Vergehens verhaftet und in ein undurchschaubares Gerichtsverfahren verstrickt. Am Ende wird er hingerichtet.</p><p>Der Roman steht für die Ohnmacht des Einzelnen gegenüber einer anonymen, sinnentleerten <b>Bürokratie</b> und für eine diffuse, unfassbare Schuld. Die eingelagerte <b>Türhüterlegende</b> deutet den versperrten Zugang zu letzter Wahrheit an.</p>"},{"slug":"buddenbrooks","title":"Buddenbrooks","crumb":"Werke › Deutschland","body":"<p><b>Buddenbrooks</b> (1901) ist der Debütroman von <b>Thomas Mann</b> und schildert den 'Verfall einer Familie' – den Niedergang einer Lübecker Kaufmannsdynastie über vier Generationen. Für dieses Werk erhielt Mann später den Nobelpreis.</p><p>Der Roman verbindet realistische Gesellschaftschronik mit dem Motiv, dass wachsende Sensibilität und Künstlertum die praktische Lebenstüchtigkeit untergraben. (In der Lernkarten-App als Erweiterung vorgesehen.)</p>"},{"slug":"schuld-und-suehne","title":"Schuld und Sühne","crumb":"Werke › Russland","body":"<p>In <a class='ilink' data-s='dostojewski'>Dostojewskis</a> <b>Schuld und Sühne</b> (1866) ermordet der Student Raskolnikow eine Pfandleiherin, um seine Theorie vom 'außergewöhnlichen Menschen' zu beweisen, der über der Moral stehe. Die Tat zerstört ihn seelisch.</p><p>Erst durch Geständnis und die Liebe der gläubigen Sonja findet er einen Weg zur Umkehr. Der Roman ist ein Meilenstein des <b>psychologischen Erzählens</b> und ein eindringliches Argument gegen die These, ein höherer Zweck rechtfertige jedes Mittel.</p>"},{"slug":"stolz-und-vorurteil","title":"Stolz und Vorurteil","crumb":"Werke › England","body":"<p><b>Stolz und Vorurteil</b> (1813) von <a class='ilink' data-s='austen'>Jane Austen</a> erzählt, wie die kluge Elizabeth Bennet und der vornehme Mr. Darcy ihre gegenseitigen Vorurteile überwinden. Feine Ironie trifft auf scharfe Gesellschaftsbeobachtung.</p><p>Der Roman kritisiert die ökonomische Zwangslage der Frauen und die Verengung der Ehe auf Geld und Stand. Elizabeth beansprucht Urteilskraft und die Wahl aus Liebe – eine für ihre Zeit erstaunlich moderne Figur.</p>"},{"slug":"1984","title":"1984","crumb":"Werke › Dystopie","body":"<p><b>1984</b> (1949) von <a class='ilink' data-s='orwell'>George Orwell</a> entwirft den totalitären Überwachungsstaat Ozeanien unter dem 'Großen Bruder'. Winston Smith lehnt sich innerlich auf, wird gefoltert und schließlich gebrochen.</p><p>Der Roman prägte Begriffe wie <b>Big Brother</b>, <b>Neusprech</b> und <b>Doppeldenk</b>. Er warnt vor Massenüberwachung, Sprach- und Gedankenkontrolle sowie der Manipulation der Vergangenheit – gegen jede Form totalitärer Herrschaft.</p>"},{"slug":"der-fremde","title":"Der Fremde","crumb":"Werke › Moderne","body":"<p><b>Der Fremde</b> (1942) von <a class='ilink' data-s='camus'>Albert Camus</a> schildert den teilnahmslosen Meursault, der am Strand von Algier fast ohne Motiv einen Mann erschießt. Im Prozess wird ihm vor allem seine Gefühlskälte zum Verhängnis.</p><p>Der Roman ist ein Schlüsseltext der Philosophie des <b>Absurden</b>: des Widerspruchs zwischen menschlichem Sinnverlangen und einer gleichgültigen Welt. Meursault findet Freiheit erst, indem er diese 'zärtliche Gleichgültigkeit' annimmt.</p>"},{"slug":"goethe","title":"Johann Wolfgang von Goethe","crumb":"Autoren","body":"<p><b>Johann Wolfgang von Goethe</b> (1749–1832) ist der bedeutendste deutsche Dichter. Er wirkte am Hof von Weimar und prägte mit Schiller die <b>Weimarer Klassik</b>. Sein Werk reicht vom stürmischen <a class='ilink' data-s='werther'>Werther</a> bis zum <a class='ilink' data-s='faust'>Faust</a>, an dem er über 60 Jahre arbeitete.</p>"},{"slug":"kafka","title":"Franz Kafka","crumb":"Autoren","body":"<p><b>Franz Kafka</b> (1883–1924) aus dem deutschsprachig-jüdischen Prag ist einer der einflussreichsten Autoren der Moderne. Hauptberuflich Versicherungsjurist, schrieb er <a class='ilink' data-s='verwandlung'>Die Verwandlung</a> und <a class='ilink' data-s='prozess'>Der Prozess</a>. Seine unabgeschlossenen, beklemmenden Texte prägten den Begriff 'kafkaesk'.</p>"},{"slug":"dostojewski","title":"Fjodor M. Dostojewski","crumb":"Autoren","body":"<p><b>Fjodor M. Dostojewski</b> (1821–1881) gilt als Meister des psychologischen Romans. Von einer Scheinhinrichtung und sibirischer Verbannung geprägt, kreist sein Werk um Schuld, Glaube und Freiheit. Neben <a class='ilink' data-s='schuld-und-suehne'>Schuld und Sühne</a> schrieb er 'Die Brüder Karamasow' und 'Der Idiot'.</p>"},{"slug":"austen","title":"Jane Austen","crumb":"Autoren","body":"<p><b>Jane Austen</b> (1775–1817) schrieb ironische Gesellschaftsromane des englischen Landadels. Zu Lebzeiten anonym veröffentlicht, gilt sie heute als Klassikerin der Weltliteratur. Neben <a class='ilink' data-s='stolz-und-vorurteil'>Stolz und Vorurteil</a> verfasste sie 'Emma' und 'Verstand und Gefühl'.</p>"},{"slug":"orwell","title":"George Orwell","crumb":"Autoren","body":"<p><b>George Orwell</b> (1903–1950), eigentlich Eric Arthur Blair, war britischer Autor und Journalist mit antitotalitärer Haltung. Neben <a class='ilink' data-s='1984'>1984</a> schrieb er die Stalinismus-Satire 'Farm der Tiere'. Sein Name wurde zum Adjektiv 'orwellsch' für Überwachung und Propaganda.</p>"},{"slug":"camus","title":"Albert Camus","crumb":"Autoren","body":"<p><b>Albert Camus</b> (1913–1960), in Algerien aufgewachsen, erhielt 1957 den Literaturnobelpreis. Sein Denken kreist um das <b>Absurde</b> und die <b>Revolte</b>. Neben <a class='ilink' data-s='der-fremde'>Der Fremde</a> schrieb er den Essay 'Der Mythos des Sisyphos'.</p>"},{"slug":"quellen","title":"Quellen & Hinweis","crumb":"Service","body":"<p>Die Werkauswahl orientiert sich u. a. am <b>dtv-Literaturkanon</b>, an 'Die besten aller Zeiten' (Klassiker der Weltliteratur) und an der buchtipp.de-Liste '100 beste Bücher'.</p><p>Alle Zusammenfassungen, Deutungen und Einordnungen sind eigenständig formuliert. Es werden bewusst <b>keine urheberrechtlich geschützten Originalzitate</b> wiedergegeben.</p>"}],"tree":[{"name":"Grundlagen","ic":"🗺️","slugs":["ueberblick"],"subs":[]},{"name":"Werke","ic":"📖","slugs":[],"subs":[{"name":"Deutschland","slugs":["faust","werther","buddenbrooks"]},{"name":"Weltliteratur","slugs":["schuld-und-suehne","stolz-und-vorurteil","1984","der-fremde"]},{"name":"Moderne","slugs":["verwandlung","prozess"]}]},{"name":"Autoren","ic":"🧠","slugs":["goethe","kafka","dostojewski","austen","orwell","camus"],"subs":[]},{"name":"Service","ic":"📚","slugs":["quellen"],"subs":[]}],"catIcons":{}};
+var root=document.documentElement;
+// ---- theme ----
+function initTheme(){var p=new URLSearchParams(location.search).get('theme');var t;
+  if(p==='dark'||p==='light')t=p;else{try{t=localStorage.getItem('nsw_theme')||'light'}catch(e){t='light'}}
+  applyTheme(t);}
+function applyTheme(t){if(t==='dark'){root.setAttribute('data-theme','dark');}else{root.removeAttribute('data-theme');}
+  document.getElementById('themebtn').textContent=(t==='dark')?'☀️':'🌙';curTheme=t;
+  // update any embedded aroma iframe
+  var af=document.querySelector('.aromaframe');if(af){var u=af.getAttribute('data-base');af.src=u+'?theme='+t;}}
+var curTheme='light';
+document.getElementById('themebtn').onclick=function(){var t=curTheme==='dark'?'light':'dark';try{localStorage.setItem('nsw_theme',t)}catch(e){}applyTheme(t);};
+// ---- index ----
+var BYSLUG={};APP.articles.forEach(function(a){BYSLUG[a.slug]=a;});
+document.title=APP.title+' – Nachschlagewerk';
+document.getElementById('brand').innerHTML=APP.brand;
+document.getElementById('logo').textContent=APP.ic;
+root.style.setProperty('--brand',APP.color);
+var meta=document.createElement('meta');meta.name='theme-color';meta.content=APP.color;document.head.appendChild(meta);
+// ---- sidebar ----
+function buildSidebar(){
+  var side=document.getElementById('side');side.innerHTML='';
+  APP.tree.forEach(function(c,ci){
+    var cat=document.createElement('div');cat.className='cat'+(ci>0?' collapsed':'');
+    var btn=document.createElement('button');btn.className='catname';btn.innerHTML=(c.ic?c.ic+' ':'')+c.name+'<span class="tw">▾</span>';
+    btn.onclick=function(){cat.classList.toggle('collapsed');};
+    cat.appendChild(btn);
+    var ch=document.createElement('div');ch.className='children';
+    (c.slugs||[]).forEach(function(s){ch.appendChild(mkA(s));});
+    (c.subs||[]).forEach(function(sub){
+      var sn=document.createElement('div');sn.className='subname';sn.textContent=sub.name;ch.appendChild(sn);
+      sub.slugs.forEach(function(s){ch.appendChild(mkA(s));});
+    });
+    cat.appendChild(ch);side.appendChild(cat);
+  });
+}
+function mkA(slug){var a=BYSLUG[slug];var b=document.createElement('button');b.className='alink';b.dataset.s=slug;b.textContent=a?a.title:slug;b.onclick=function(){go(slug);closeSide();};return b;}
+// ---- article render ----
+function go(slug){
+  var a=BYSLUG[slug];if(!a){a=APP.articles[0];slug=a.slug;}
+  if(location.hash!=='#'+slug)history.replaceState(null,'','#'+slug);
+  document.querySelectorAll('.alink').forEach(function(x){x.classList.toggle('active',x.dataset.s===slug);});
+  // expand the cat containing it
+  var m=document.getElementById('main');
+  var sa="";
+  m.innerHTML='<div class="crumb">'+a.crumb+'</div><article class="art"><h1>'+a.title+'</h1>'+a.body+sa+'</article>';
+  m.scrollTop=0;window.scrollTo(0,0);
+  // wire internal links
+  m.querySelectorAll('a.ilink').forEach(function(l){l.onclick=function(e){e.preventDefault();go(l.dataset.s);};});
+  m.querySelectorAll('.seealso a').forEach(function(l){l.onclick=function(e){e.preventDefault();go(l.dataset.s);};});
+}
+function relatedChips(slug){
+  var a=BYSLUG[slug];if(!a.rel||!a.rel.length)return '';
+  var c=a.rel.map(function(s){var t=BYSLUG[s];return t?'<a data-s="'+s+'">'+t.title+'</a>':'';}).join('');
+  return '<div class="seealso"><b>Siehe auch</b><div class="chips">'+c+'</div></div>';
+}
+// ---- search ----
+function strip(s){return (s||'').replace(/<[^>]+>/g,' ');}
+document.getElementById('search').addEventListener('input',function(e){
+  var q=e.target.value.trim().toLowerCase();
+  if(!q){var h=location.hash.slice(1);go(BYSLUG[h]?h:APP.articles[0].slug);return;}
+  var hits=APP.articles.filter(function(a){return (a.title+' '+strip(a.body)).toLowerCase().indexOf(q)>-1;}).slice(0,40);
+  var m=document.getElementById('main');
+  m.innerHTML='<div class="crumb">Suche</div><h1 class="art" style="font-size:24px;margin:0 0 14px">'+hits.length+' Treffer für „'+e.target.value+'"</h1><div class="results"></div>';
+  var box=m.querySelector('.results');
+  hits.forEach(function(a){var b=document.createElement('button');b.className='alink';b.dataset.s=a.slug;b.textContent=a.title;b.onclick=function(){go(a.slug);};box.appendChild(b);});
+  if(!hits.length)m.querySelector('.results').innerHTML='<p class="muted">Nichts gefunden.</p>';
+});
+// ---- mobile ----
+function closeSide(){document.getElementById('side').classList.remove('open');document.getElementById('backdrop').classList.remove('open');}
+document.getElementById('menubtn').onclick=function(){document.getElementById('side').classList.toggle('open');document.getElementById('backdrop').classList.toggle('open');};
+document.getElementById('backdrop').onclick=closeSide;
+// ---- init ----
+document.getElementById('logo').onclick=function(){go(APP.articles[0].slug);closeSide();};
+initTheme();buildSidebar();
+var start=location.hash.slice(1);go(BYSLUG[start]?start:APP.articles[0].slug);
+window.addEventListener('hashchange',function(){var h=location.hash.slice(1);if(h&&BYSLUG[h])go(h);});
+</script>
+</body>
+</html>
